@@ -1,0 +1,29 @@
+# AI ve Makine Öğrenmesi Terimleri
+
+## RAG (Retrieval Augmented Generation)
+RAG, dil modellerinin harici bilgi kaynaklarına erişmesini sağlayan bir tekniktir. 
+İki ana aşamadan oluşur: Retrieval (getirme) ve Generation (üretim).
+
+### Retrieval Aşaması
+Retrieval aşamasında, kullanıcı sorusuna en benzer bilgi parçaları bir vektör veritabanından getirilir.
+Bu aşama semantic search (anlamsal arama) kullanır.
+
+### Generation Aşaması  
+Generation aşamasında, dil modeli getirilen bilgileri kullanarak doğal dilde cevap oluşturur.
+Model hem retrieved bilgileri hem de kendi bilgisini kullanır.
+
+## NLP (Natural Language Processing)
+NLP, Doğal Dil İşleme anlamına gelir. Bilgisayarların insan dilini anlamasını ve işlemesini sağlar.
+Metin sınıflandırma, duygu analizi, makine çevirisi gibi alanları vardır.
+
+## Yapay Zeka (Artificial Intelligence)
+Yapay zeka, makinelerin insan benzeri zeka yeteneklerini sergilemesidir. 
+Öğrenme, mantık yürütme, problem çözme yeteneklerini içerir.
+
+## Makine Öğrenmesi (Machine Learning)
+Makine öğrenmesi, bilgisayarların veriden öğrenmesini sağlayan bir yapay zeka dalıdır.
+Denetimli öğrenme, denetimsiz öğrenme ve pekiştirmeli öğrenme olarak üçe ayrılır.
+
+## Derin Öğrenme (Deep Learning)
+Derin öğrenme, sinir ağları kullanarak karmaşık desenleri öğrenen bir makine öğrenmesi alt alanıdır.
+Görüntü işleme, ses tanıma gibi alanlarda kullanılır.
