@@ -3,6 +3,26 @@
 ## 🎯 Proje Amacı
 Retrieval Augmented Generation (RAG) teknolojisi kullanarak akıllı soru-cevap chatbotu geliştirmek.
 
+## Requirements & Configuration
+- Python 3.10+
+- Create and fill `.env` from `.env.template`
+  - `OPENAI_API_KEY` : OpenAI API anahtarınız
+  - `HF_TOKEN` : HuggingFace token (opsiyonel)
+  - `CHROMA_PERSIST_DIR` : Chroma persist dizini (varsayılan: chroma_db)
+
+## Quick start (local)
+1. git clone https://github.com/enesmanan/gaih-chatbot.git
+2. python -m venv .venv
+3. source .venv/bin/activate
+4. pip install -r requirements.txt
+5. cp .env.template .env  # .env içine gerekli API anahtarlarını koy
+6. python utils/data_loader.py   # veri hazırlama & chunking
+7. python utils/embedding.py     # embedding ve Chroma persist
+8. streamlit run app.py
+
+## Deployment
+- 
+
 ## 📊 Veri Seti
 - **Kaynak**: Yapay Zeka ve Makine Öğrenmesi terimleri
 - **Format**: PDF ve TXT dosya desteği
