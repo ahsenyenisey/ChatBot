@@ -55,7 +55,6 @@ def load_vector_store(persist_directory="./vector_db"):
     print("✅ Vektör veritabanı yüklendi")
     return vector_store
 
-# Test fonksiyonu
 if __name__ == "__main__":
     from data_loader import load_and_process_documents
     

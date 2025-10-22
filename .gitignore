@@ -148,7 +148,4 @@ logs/
 *.temp
 
 # Streamlit
-.streamlit/.env
-.env
-.env
-.env
+.streamlit/

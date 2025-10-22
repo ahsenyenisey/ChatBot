@@ -1,10 +1,10 @@
 import os
-from langchain_community.document_loaders import PyPDFLoader, TextLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
+from langchain_core.documents import Document
 
 def load_and_process_documents(data_folder="./data"):
     """
-    PDF ve text dosyalarını yükler, işler ve parçalara ayırır
+    Basit text dosyası yükleyici
     """
     documents = []
     
@@ -17,17 +17,7 @@ def load_and_process_documents(data_folder="./data"):
     for file in os.listdir(data_folder):
         file_path = os.path.join(data_folder, file)
         
-        if file.endswith(".pdf"):
-            print(f"📖 PDF yükleniyor: {file}")
-            try:
-                loader = PyPDFLoader(file_path)
-                loaded_docs = loader.load()
-                documents.extend(loaded_docs)
-                print(f"✅ {file} başarıyla yüklendi - {len(loaded_docs)} sayfa")
-            except Exception as e:
-                print(f"❌ {file} yüklenirken hata: {e}")
-                
-        elif file.endswith(".txt"):
+        if file.endswith(".txt"):
             print(f"📝 Text dosyası yükleniyor: {file}")
             try:
                 loader = TextLoader(file_path, encoding='utf-8')
@@ -43,23 +33,27 @@ def load_and_process_documents(data_folder="./data"):
     
     print(f"📊 Toplam {len(documents)} doküman yüklendi")
     
-    # Metinleri parçalara ayır
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,      # Her parça 1000 karakter
-        chunk_overlap=200,    # Parçalar 200 karakter örtüşsün
-        length_function=len,
-    )
+    # BASİT metin bölme
+    texts = []
+    for doc in documents:
+        content = doc.page_content
+        # 1000 karakterlik parçalara böl
+        for i in range(0, len(content), 800):
+            chunk = content[i:i+1000]
+            if len(chunk.strip()) > 50:  # Boş parçaları atla
+                new_doc = Document(
+                    page_content=chunk,
+                    metadata=doc.metadata.copy()
+                )
+                texts.append(new_doc)
     
-    texts = text_splitter.split_documents(documents)
     print(f"✂️ {len(documents)} doküman → {len(texts)} metin parçası oluşturuldu")
     
     return texts
 
-# Test fonksiyonu
 if __name__ == "__main__":
     texts = load_and_process_documents()
     if texts:
         print(f"\n🧪 İlk parça önizleme:")
         print(f"İçerik: {texts[0].page_content[:200]}...")
         print(f"Kaynak: {texts[0].metadata.get('source', 'Bilinmiyor')}")
-        print(f"Sayfa: {texts[0].metadata.get('page', 'Bilinmiyor')}")

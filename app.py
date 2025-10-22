@@ -1,31 +1,17 @@
 import streamlit as st
 import sys
 import os
-from dotenv import load_dotenv
 
-# Gerekli modülleri ekle
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from utils.rag import FixedRAGPipeline
-
-# Sayfa konfigürasyonu - UTF-8 encoding için
+# Sayfa konfigürasyonu
 st.set_page_config(
     page_title="Akbank RAG Chatbot",
     page_icon="🤖",
     layout="wide"
 )
 
-# UTF-8 encoding için
-st.markdown(
-    """
-    <meta charset="UTF-8">
-    <style>
-    .stChatMessage {
-        font-family: 'Arial', sans-serif;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Gerekli modülleri ekle
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from utils.rag import FixedRAGPipeline
 
 def initialize_rag():
     """RAG pipeline'ını başlat"""
@@ -46,19 +32,12 @@ def main():
         st.header("ℹ️ Hakkında")
         st.write("""
         **Akbank GenAI Bootcamp** projesi kapsamında geliştirilmiş RAG tabanlı chatbot.
-        
-        **Özellikler:**
-        - PDF ve TXT dosyalarını işler
-        - Vektör tabanlı benzerlik arama
-        - Bağlama dayalı cevaplar
-        - Kaynak gösterimi
         """)
         
         st.header("💡 Örnek Sorular")
         questions = [
             "RAG nedir?",
             "Retrieval ne demek?", 
-            "Generation aşaması nedir?",
             "NLP nedir?",
             "Yapay zeka nedir?"
         ]
@@ -102,24 +81,9 @@ def main():
                     response = st.session_state.rag.ask(user_input)
                     
                     # Cevap
-                    st.markdown(f"**{response['answer']}**")
+                    st.markdown(response['answer'])
                     
-                    # Kaynakları GÖSTER - expander içinde
-                    if response['sources']:
-                        with st.expander(f"📚 {len(response['sources'])} kaynak göster", expanded=False):
-                            for i, source in enumerate(response['sources'], 1):
-                                st.markdown(f"**Kaynak {i}:**")
-                                st.text_area(
-                                    f"İçerik {i}",
-                                    value=source.page_content,
-                                    height=150,
-                                    key=f"source_{i}_{hash(user_input)}",
-                                    label_visibility="collapsed"
-                                )
-                                source_file = os.path.basename(source.metadata.get('source', 'Bilinmiyor'))
-                                st.caption(f"📄 Dosya: {source_file}")
-                    
-                    # Geçmişe ekle (sadece cevap)
+                    # Geçmişe ekle
                     st.session_state.messages.append({
                         "role": "assistant", 
                         "content": response['answer']
@@ -128,11 +92,6 @@ def main():
                 except Exception as e:
                     error_msg = f"❌ Hata oluştu: {str(e)}"
                     st.error(error_msg)
-                    st.session_state.messages.append({
-                        "role": "assistant", 
-                        "content": error_msg
-                    })
 
 if __name__ == "__main__":
-    load_dotenv()
     main()
