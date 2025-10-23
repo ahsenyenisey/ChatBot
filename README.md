@@ -10,7 +10,7 @@ Language Model)** ile doğal dilde yanıt üretir.\
 Amaç, kullanıcıların spesifik bir bilgi kümesi hakkında **doğru, bağlama
 uygun ve tutarlı** yanıtlar almasını sağlamaktır.
 
-<img width="1710" height="1112" alt="Screenshot 2025-10-23 at 13 39 48" src="https://github.com/user-attachments/assets/4659420b-ef00-4769-9695-0d75f9e4a6ce" />
+<img width="1710" height="905" alt="Screenshot 2025-10-23 at 13 41 06" src="https://github.com/user-attachments/assets/58656cd6-b9dc-4480-81b4-410a372e7bf6" />
 
 ------------------------------------------------------------------------
 
